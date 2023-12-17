@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Split Map of TIFF Images using Leaflet and Leafmap</title>
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Leafmap JavaScript -->
+    <script src="https://unpkg.com/leafmap@0.2.0/leafmap.js"></script>
+    <style>
+        /* Set the map container height */
+        #map {
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Map Container -->
+<div id="map"></div>
+
+<script>
+    // Initialize Leaflet map
+    var map = L.map('map').setView([0, 0], 2);
+
+    // Create a basemap layer (you can change the URL to your desired basemap)
+    var basemapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // TIFF image URLs
+    var tiffImage1 = 'path_to_your_tiff_image1.tif'; // Replace with your TIFF image URL
+    var tiffImage2 = 'path_to_your_tiff_image2.tif'; // Replace with your TIFF image URL
+
+    // Add the split map control with TIFF images
+    var splitMap = L.control.splitMap([
+        L.leafletGeotiff(tiffImage1).addTo(map),
+        L.leafletGeotiff(tiffImage2).addTo(map)
+    ]).addTo(map);
+</script>
+
+</body>
+</html>
